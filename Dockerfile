@@ -1,13 +1,17 @@
+# Use the official Tomcat base image
+FROM tomcat:10.1-jdk21-temurin
 
-# Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-# Click nbfs://nbhost/SystemFileSystem/Templates/Other/Dockerfile to edit this template
+# Set environment variables
+ENV JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom"
 
-FROM tomcat:10.1-alpine
+# Set working directory
+WORKDIR /usr/local/tomcat
 
-RUN rm -rf /usr/local/tomcat/webapps/*
+# Copy all WAR files from a local directory to Tomcat's webapps folder
+COPY ./war-files/*.war /usr/local/tomcat/webapps/
 
-COPY *.war /usr/local/tomcat/webapps
-
+# Expose the Tomcat port
 EXPOSE 8080
 
-CMD ["catalina.sh","run"]
+# Start Tomcat
+CMD ["catalina.sh", "run"]
