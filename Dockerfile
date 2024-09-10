@@ -8,7 +8,7 @@ ENV JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom"
 WORKDIR /usr/local/tomcat
 
 # Copy all WAR files from a local directory to Tomcat's webapps folder
-COPY ./war-files/*.war /usr/local/tomcat/webapps/
+COPY *.war /usr/local/tomcat/webapps/
 
 # Expose the Tomcat port
 EXPOSE 8080
